@@ -4,10 +4,8 @@ const si = require('systeminformation');
 
 exports.cpuInfo = async(req, res, next) => {
   try{
-    const {manufacturer, brand, speed, speedMin, speedMax,
-    cores, physicalCores, processors, socket, vendor, family, model,
-  stepping, revision, virtualization, flags, cache} = await si.cpu()
-    res.status(200).json(cpu);
+    const {governor, efficiencyCores, performanceCores, voltage, ...data} = await si.cpu()
+    res.status(200).json(data);
   }catch(error){
     next(createError.NotFound())
   }
@@ -26,6 +24,24 @@ exports.osInfo = async(req, res, next) => {
   try{
     const os = await si.osInfo()
     res.status(200).json(os);
+  }catch(error){
+    next(createError.NotFound())
+  }
+}
+
+exports.system = async(req, res, next) => {
+  try{
+    const system = await si.system()
+    res.status(200).json(system);
+  }catch(error){
+    next(createError.NotFound())
+  }
+}
+
+exports.baseboard = async(req, res, next) => {
+  try{
+    const baseboard = await si.baseboard()
+    res.status(200).json(baseboard);
   }catch(error){
     next(createError.NotFound())
   }
@@ -60,6 +76,24 @@ exports.memoryInfo = async(req, res, next) => {
       available: available/(1024**3)
     }
     res.status(200).json(data);
+  }catch(error){
+    next(createError.NotFound())
+  }
+}
+
+exports.memLayout = async(req, res, next) => {
+  try{
+    const memLayout = await si.memLayout()
+    res.status(200).json(memLayout);
+  }catch(error){
+    next(createError.NotFound())
+  }
+}
+
+exports.graphics = async(req, res, next) => {
+  try{
+    const graphics = await si.graphics()
+    res.status(200).json(graphics);
   }catch(error){
     next(createError.NotFound())
   }
