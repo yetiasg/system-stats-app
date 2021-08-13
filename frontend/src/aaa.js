@@ -1,1 +1,0 @@
-export const conslog = () => console.log('aaa')

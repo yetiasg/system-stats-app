@@ -3,6 +3,8 @@ const dataController = require('../controller/controller');
 
 router.get('/cpuInfo', dataController.cpuInfo);
 
+router.get('/cpuUsage', dataController.cpuUsage);
+
 router.get('/biosInfo', dataController.biosInfo);
 
 router.get('/osInfo', dataController.osInfo);
@@ -20,11 +22,6 @@ router.get('/memoryInfo', dataController.memoryInfo);
 router.get('/memLayout', dataController.memLayout);
 
 router.get('/graphics', dataController.graphics);
-
-
-
-
-
 
 
 module.exports = router;

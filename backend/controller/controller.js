@@ -1,4 +1,5 @@
 const createError = require('http-errors');
+const os = require('os');
 const si = require('systeminformation');
 
 
@@ -6,6 +7,15 @@ exports.cpuInfo = async(req, res, next) => {
   try{
     const {governor, efficiencyCores, performanceCores, voltage, ...data} = await si.cpu()
     res.status(200).json(data);
+  }catch(error){
+    next(createError.NotFound())
+  }
+}
+
+exports.cpuUsage = async(req, res, next) => {
+  try{
+    const cpus = os.cpus();
+    res.status(200).json(cpus);
   }catch(error){
     next(createError.NotFound())
   }
